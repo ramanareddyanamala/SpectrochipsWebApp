@@ -1,0 +1,27 @@
+<ng-template #customLoadingTemplate>
+  <div class="custom-class">
+
+  </div>
+</ng-template>
+
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
+
+
+<div class="row m-b-18px">
+  <div class="col-md-12">
+
+    <a (click)="readUsers()" class='btn btn-primary pull-right'>
+      <span class='glyphicon glyphicon-list'></span> Testers List
+    </a>
+</div>
+
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <!-- HTML table for displaying a product details -->
+    <pre>
+       {{jsdata}}
+    </pre>
+  </div>
+</div>

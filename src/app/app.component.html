@@ -1,20 +1,160 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<!--<IMG SRC="logo.jpg" ALT="some text" WIDTH=60 HEIGHT=40>-->
+<nav class="row">
 
+  <!-- logo -->
+  <div class="col-md-10">
+    <a class="navbar-item is-black">
+      <img src="http://18.204.210.99:8080/spectrochips/files/logo.jpg" alt="logo" width="150" height="100"/>
+    </a>
+    <a *ngIf="show_read_files_html ||show_read_one_user_html || show_read_users_html || show_create_user_html || show_update_user_html || show_delete_user_html" (click)="showLoginPage()" class='btn btn-danger pull-right'>
+      <span class='glyphicon glyphicon-log-out'></span> Logout
+    </a>
+
+  </div>
+</nav>
+
+<!-- container -->
+<div class="container">
+
+  <!-- show page header -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class='page-header'><h1>{{title}}</h1></div>
+    </div>
+  </div>
+
+  <app-user-login
+    *ngIf="show_user_login_html"
+    (show_read_users_event)="showReadUsers($event)">
+  </app-user-login>
+
+  <app-read-files
+    *ngIf="show_read_files_html"
+    [url]="url"
+    [username]="username"
+    (show_read_users_event)="showReadUsers($event)">
+  </app-read-files>
+
+  <!-- Show this view if "show_read_products_html" property of AppComponent is true. -->
+  <app-read-users
+    *ngIf="show_read_users_html"
+    (show_create_user_event)="showCreateUser($event)"
+    (show_read_one_user_event)="showReadOneUser($event)"
+    (show_update_user_event)="showUpdateUser($event)"
+    (show_delete_user_event)="showDeleteUser($event)"
+    (show_user_login_event)="showUserLogin($event)"
+    (show_user_files_event)="showReadFiles($event)"
+    (show_read_files_event)="showReadFiles($event)"
+    (show_create_test_event)="showCreateTest($event)"
+    (show_create_sequence_event)="showCreateSequence($event)"
+    (show_update_test_event)="showUpdateTest($event)"
+    (show_update_sequence_event)="showUpdateSequence($event)"
+    (show_delete_test_event)="showDeleteTest($event)"
+    (show_delete_sequence_event)="showDeleteSequence($event)"
+    [username]="username">
+  </app-read-users>
+
+  <app-create-user
+    *ngIf="show_create_user_html"
+    [username]="username"
+    (show_read_users_event)="showReadUsers($event)">
+  </app-create-user>
+
+  <app-create-testuser
+  *ngIf="show_create_testuser_html"
+  (show_read_one_user_event)="showReadOneUser($event)"
+  [userID]="userID"
+  [username]="username">
+  </app-create-testuser>
+
+  <app-create-sequenceuser
+  *ngIf="show_create_sequenceuser_html"
+  (show_read_one_user_event)="showReadOneUser($event)"
+  [userID]="userID"
+  [username]="username">
+  </app-create-sequenceuser>
+
+  <app-create-test
+  *ngIf="show_create_test_html"
+  (show_read_users_event)="showReadUsers($event)"
+  [username]="username">
+  </app-create-test>
+
+  <app-create-sequence
+  *ngIf="show_create_sequence_html"
+  (show_read_users_event)="showReadUsers($event)"
+  [username]="username">
+  </app-create-sequence>
+
+  <app-update-test
+  *ngIf="show_update_test_html"
+  (show_read_users_event)="showReadUsers($event)"
+  [url]="url"
+  [username]="username"></app-update-test>
+
+  <app-update-sequence
+  *ngIf="show_update_sequence_html"
+  (show_read_users_event)="showReadUsers($event)"
+  [url]="url"
+  [username]="username"></app-update-sequence>
+
+  <!--
+    * Show this view if "show_read_one_product_html" is true.
+
+    * If (show_read_products_event) was emmited in ReadOneProductComponent,
+      trigger showReadProducts() method in AppComponent.
+
+    * Pass "product_id" property value of AppComponent
+      to [product_id] property of ReadOneProductComponent.
+-->
+
+  <app-read-one-user
+    *ngIf="show_read_one_user_html"
+    (show_read_users_event)="showReadUsers($event)"
+    (show_read_files_event)="showReadFiles($event)"
+    (show_create_testuser_event)="showCreateTestuser($event)"
+    (show_create_sequenceuser_event)="showCreateSequenceuser($event)"
+    [username]="username"
+    [userID]="userID">
+  </app-read-one-user>
+
+  <!--
+    * Show this view if "show_update_product_html" is true.
+
+    * Pass "product_id" property value of AppComponent
+      to [product_id] property of UpdateProductComponent.
+
+    * If (show_read_products_event) was emitted in UpdateProductComponent,
+      trigger showReadProducts() method in AppComponent.
+-->
+
+  <app-update-user
+    *ngIf="show_update_user_html"
+    [userID]="userID"
+    [username]="username"
+    (show_read_users_event)="showReadUsers($event)">
+  </app-update-user>
+
+
+  <app-delete-user
+    *ngIf="show_delete_user_html"
+    [userID]="userID"
+    [username]="username"
+    (show_read_users_event)="showReadUsers($event)">
+  </app-delete-user>
+
+  <app-delete-test
+  *ngIf="show_delete_test_html"
+  [username]="username"
+  [url]="url"
+  (show_read_users_event)="showReadUsers($event)">
+  </app-delete-test>
+
+  <app-delete-sequence
+  *ngIf="show_delete_sequence_html"
+  [username]="username"
+  [url]="url"
+  (show_read_users_event)="showReadUsers($event)">
+  </app-delete-sequence>
+
+</div>
