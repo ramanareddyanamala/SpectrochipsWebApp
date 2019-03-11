@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { WINDOW } from '@ng-toolkit/universal';
+import { Component, OnInit, Input, Output, EventEmitter , Inject} from '@angular/core';
 import { Observable} from 'rxjs';
 import { User } from '../user';
 import {UserService} from '../user.service';
@@ -37,7 +38,7 @@ export class ReadUsersComponent implements OnInit {
   files: any[];
   public loading = false;
   // initialize productService to retrieve list products in the ngOnInit()
-  constructor(private userService: UserService) {}
+  constructor(@Inject(WINDOW) private window: Window, private userService: UserService) {}
 
   // methods that we will use later
   // when user clicks the 'create' button
@@ -150,14 +151,14 @@ export class ReadUsersComponent implements OnInit {
           // go back to list of products
           console.log('start download:', user);
           var blob = new Blob([JSON.stringify(user)], { type: 'application/json' });
-          var url = window.URL.createObjectURL(blob);
+          var url = this.window.URL.createObjectURL(blob);
           var a = document.createElement('a');
           document.body.appendChild(a);
           a.setAttribute('style', 'display: none');
           a.href = url;
           a.download = m[1];
           a.click();
-          window.URL.revokeObjectURL(url);
+          this.window.URL.revokeObjectURL(url);
           a.remove(); // remove the element
         },
         error => {

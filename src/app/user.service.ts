@@ -15,14 +15,14 @@ export class UserService {
 
   readPublic(): Observable<any> {
     return this._http
-      .get("http://18.204.210.99:8080/spectrochips/public/json")
+      .get("https://www.vedascloud.com/spectrochips/public/json")
       .pipe(map((res: Response) => res.json()));
   }
   // Get list of products from remote server.
   readUsers(): Observable<User[]> {
     //18.204.210.99
     return this._http
-      .get("http://18.204.210.99:8080/spectrochips/users")
+      .get("https://www.vedascloud.com/spectrochips/users")
       .pipe(map((res: Response) => res.json()));
   }
 
@@ -33,7 +33,7 @@ export class UserService {
     let options = new RequestOptions({ headers: headers });
 
     return this._http.post(
-      "http://18.204.210.99:8080/spectrochips/user",
+      "https://www.vedascloud.com/spectrochips/user",
       user,
       options
     ).pipe(map((res: Response) => res.json()));
@@ -44,7 +44,7 @@ export class UserService {
     let options = new RequestOptions({ headers: headers });
 
     return this._http.post(
-      "http://18.204.210.99:8080/spectrochips/admin/login",
+      "https://www.vedascloud.com/spectrochips/admin/login",
       user,
       options
     ).pipe(map((res: Response) => res.json()));
@@ -53,7 +53,7 @@ export class UserService {
   // Get a user details from remote server.
   readOneUser(userID): Observable<User> {
     return this._http
-      .get("http://18.204.210.99:8080/spectrochips/user/"+userID)
+      .get("https://www.vedascloud.com/spectrochips/user/"+userID)
       .pipe(map((res: Response) => res.json()));
   }
 
@@ -71,7 +71,7 @@ export class UserService {
     let options = new RequestOptions({ headers: headers });
 
     return this._http.put(
-      "http://18.204.210.99:8080/spectrochips/user",
+      "https://www.vedascloud.com/spectrochips/user",
       user,
       options
     ).pipe(map((res: Response) => res.json()));
@@ -81,7 +81,7 @@ export class UserService {
   deleteUser(userID): Observable<User> {
     console.log('user id delete...',userID);
     return this._http
-      .delete("http://18.204.210.99:8080/spectrochips/user/"+userID)
+      .delete("https://www.vedascloud.com/spectrochips/user/"+userID)
       .pipe(map((res: Response) => res.json()));
   }
 
@@ -98,7 +98,7 @@ export class UserService {
     let options = new RequestOptions({ headers: headers });
 
     return this._http
-      .post("http://18.204.210.99:8080/spectrochips/test/json/delete", { userID: userID , url : url}, options)
+      .post("https://www.vedascloud.com/spectrochips/test/json/delete", { userID: userID , url : url}, options)
       .pipe(map((res: Response) => res.json()));
   }
 
@@ -108,7 +108,7 @@ export class UserService {
     let options = new RequestOptions({ headers: headers });
 
     return this._http
-      .post("http://18.204.210.99:8080/spectrochips/sequence/json/delete", { userID: userID , url : url}, options)
+      .post("https://www.vedascloud.com/spectrochips/sequence/json/delete", { userID: userID , url : url}, options)
       .pipe(map((res: Response) => res.json()));
   }
 
@@ -118,7 +118,7 @@ export class UserService {
     let options = new RequestOptions({ headers: headers });
 
     return this._http
-      .post("http://18.204.210.99:8080/spectrochips/admin/test/delete", { url : url}, options)
+      .post("https://www.vedascloud.com/spectrochips/admin/test/delete", { url : url}, options)
       .pipe(map((res: Response) => res.json()));
 
   }
@@ -129,7 +129,7 @@ export class UserService {
     let options = new RequestOptions({ headers: headers });
 
     return this._http
-      .post("http://18.204.210.99:8080/spectrochips/admin/sequence/delete", { url : url}, options)
+      .post("https://www.vedascloud.com/spectrochips/admin/sequence/delete", { url : url}, options)
       .pipe(map((res: Response) => res.json()));
 
   }
@@ -142,7 +142,7 @@ export class UserService {
     let options = new RequestOptions({ headers: headers });
 
     return this._http.post(
-      'http://18.204.210.99:8080/spectrochips/admin/json/test/upload', data, options
+      'https://www.vedascloud.com/spectrochips/admin/json/test/upload', data, options
     ).pipe(map((res: Response) => res.json()));
   }
 
@@ -152,7 +152,7 @@ export class UserService {
     let options = new RequestOptions({ headers: headers });
 
     return this._http.post(
-      'http://18.204.210.99:8080/spectrochips/user/json/test/upload', data, options
+      'https://www.vedascloud.com/spectrochips/user/json/test/upload', data, options
     ).pipe(map((res: Response) => res.json()));
 
   }
@@ -163,7 +163,7 @@ export class UserService {
     let options = new RequestOptions({ headers: headers });
 
     return this._http.post(
-      'http://18.204.210.99:8080/spectrochips/user/json/sequence/upload', data, options
+      'https://www.vedascloud.com/spectrochips/user/json/sequence/upload', data, options
     ).pipe(map((res: Response) => res.json()));
 
   }
@@ -173,7 +173,7 @@ export class UserService {
     let headers = new Headers();
     let options = new RequestOptions({ headers: headers });
     return this._http.post(
-      'http://18.204.210.99:8080/spectrochips/admin/test/update', data, options
+      'https://www.vedascloud.com/spectrochips/admin/test/update', data, options
     ).pipe(map((res: Response) => res.json()));
   }
 
@@ -182,7 +182,7 @@ export class UserService {
     let headers = new Headers();
     let options = new RequestOptions({ headers: headers });
     return this._http.post(
-      'http://18.204.210.99:8080/spectrochips/admin/sequence/update', data, options
+      'https://www.vedascloud.com/spectrochips/admin/sequence/update', data, options
     ).pipe(map((res: Response) => res.json()));
   }
 
@@ -195,7 +195,7 @@ export class UserService {
     let options = new RequestOptions({ headers: headers });
 
     return this._http.post(
-      'http://18.204.210.99:8080/spectrochips/admin/json/sequence/upload', data, options
+      'https://www.vedascloud.com/spectrochips/admin/json/sequence/upload', data, options
     ).pipe(map((res: Response) => res.json()));
   }
 }

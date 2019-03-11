@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, Output, OnChanges, EventEmitter } from '@angular/core';
+import { WINDOW } from '@ng-toolkit/universal';
+import { Component, OnInit, Input, Output, OnChanges, EventEmitter , Inject} from '@angular/core';
 import { UserService } from '../user.service';
 import { Observable} from 'rxjs';
 import {User} from '../user';
@@ -29,7 +30,7 @@ export class ReadOneUserComponent implements OnChanges {
   user: User;
   public loading = false;
   // initialize product service
-  constructor(private userService: UserService){}
+  constructor(@Inject(WINDOW) private window: Window, private userService: UserService){}
 
   // user clicks the 'read products' button
   readUsers(){
@@ -93,14 +94,14 @@ export class ReadOneUserComponent implements OnChanges {
           // go back to list of products
           console.log('start download:', user);
           var blob = new Blob([JSON.stringify(user)], { type: 'application/json' });
-          var url = window.URL.createObjectURL(blob);
+          var url = this.window.URL.createObjectURL(blob);
           var a = document.createElement('a');
           document.body.appendChild(a);
           a.setAttribute('style', 'display: none');
           a.href = url;
           a.download = m[1];
           a.click();
-          window.URL.revokeObjectURL(url);
+          this.window.URL.revokeObjectURL(url);
           a.remove(); // remove the element
         },
         error => console.log(error)
